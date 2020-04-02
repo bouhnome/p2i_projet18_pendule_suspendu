@@ -4,7 +4,7 @@ global M C K %matrices-coefficients du formalisme de newmark
 
 Fnl = zeros(size(X));
 
-Fnl(1) = [;];%ecrire l'expression de Fnl ici
+Fnl = [;];%ecrire l'expression de Fnl ici
 
 
 end 
