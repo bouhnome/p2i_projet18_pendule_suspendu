@@ -18,6 +18,4 @@ X0=[z0;theta0];dX0=[zp0;thetap0];             % conditions initiales
 
 [tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot);   % Integration par newmark
 
-plot(tt,Xt,'b+-')        % On trace le deplacement au cours du temps
-
 %% Comparaison avec solution analytique à effectuer
