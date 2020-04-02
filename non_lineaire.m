@@ -15,7 +15,7 @@ lambda0 = ;%amplitude de l'exitation
 omega1 = sqrt(k /(m+Ma));%pulsation du système masse ressort (pendule immobile)
 omega2 = sqrt(m*g*l/Io);%pulsation de résonnance du pendule seul
 alpha = m/(m+Ma) ;%coefficient adimensionnel 
-beta = m*l^2/Io;coefficient adimensionnel 
+beta = m*l^2/Io;%coefficient adimensionnel 
 
 global M C K %matrices-coefficients du formalisme de newmark 
 
@@ -34,13 +34,11 @@ t_init=0;               % temps initial
 %Le vecteur X est le vecteur des inconnues il contient z et theta 
 z0 = ;%valeur de z initiale 
 zp0 = ;%valeur de z_point initiale
-zpp0 = ;%valeur de z_point_point initiale
 theta0 = ;%valeur de theta initiale 
 thetap0 = ;% valeur de theta_point initiale
-thetapp0 = ;%valeur de theta_point_point initiale
-X0=[z0;theta0];dX0=[zp0;thetap0];ddX0 =[zpp0;thetapp0];             % conditions initiales
+X0=[z0;theta0];dX0=[zp0;thetap0];           % conditions initiales
 
-[tt,Xt,dXt]=newmark(X0,dX0,ddX0,t_init,dt,t_tot);   % Integration par Newmark
+[tt,Xt,dXt]=newmark(X0,dX0,t_init,dt,t_tot);   % Integration par Newmark
 
 plot(tt,Xt,'b+-')        % On trace le deplacement au cours du temps
 
