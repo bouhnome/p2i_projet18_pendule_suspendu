@@ -1,10 +1,10 @@
 clear all; close all;
 
-global k m M g l Io omega1 omega2 omega eps1 eps2 alpha beta lamda0
+global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta lamda0
 
-k = ;%2 fois la constante de raideur. (chaqur ressort a une raideur de k/2)
+k = ;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
 m = ;%masse de la tige(solide S2)
-M = ;%masse du solide S1
+Ma = ;%masse du solide S1
 g =9.8 ;%valeur du champs de gravité
 l = ;%2 fois la longeure de la tige(solide S2)
 Io = ;%moment d'inertie de la tige par rapport à son axe de rotation
@@ -12,9 +12,9 @@ eps1 = ;%facteur d'amortissement visqueux lié à omega1
 eps2 = ;%facteur d'amortissement visqueux li2 à omega2
 omega = ;%pulsation de l'exitation  
 lambda0 = ;%amplitude de l'exitation 
-omega1 = sqrt(k /(m+M));%pulsation du système masse ressort (pendule immobile)
+omega1 = sqrt(k /(m+Ma));%pulsation du système masse ressort (pendule immobile)
 omega2 = sqrt(m*g*l/Io);%pulsation de résonnance du pendule seul
-alpha = m/(m+M) ;%coefficient adimensionnel 
+alpha = m/(m+Ma) ;%coefficient adimensionnel 
 beta = m*l^2/Io;coefficient adimensionnel 
 
 global M C K %matrices-coefficients du formalisme de newmark 
