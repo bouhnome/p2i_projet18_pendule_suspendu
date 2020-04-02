@@ -19,9 +19,9 @@ beta = m*l^2/Io;coefficient adimensionnel
 
 global M C K %matrices-coefficients du formalisme de newmark 
 
-M = ;
-C = ;
-K = ;
+M = [1,0;0,l];
+C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
+K = [omega1^2,0;0,0];
 
 
 periode=2*pi/omega;      % periode de l'excitation et de la reponse
