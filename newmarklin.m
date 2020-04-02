@@ -1,4 +1,4 @@
-[tt,Xt,dXt]=verlet(X0,dX0,t_init,dt,t_tot);  
+[tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot);  
   global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta lamda0
   
   tt=[t_init:dt:t_tot];%vecteur tt à retourner 
@@ -16,7 +16,7 @@
 
   for i=2:size(tt)%boucle d'intégration temporelle
   
-  %partie à remplir avec le schéma de verlet
+  %partie à remplir avec le schéma de newmark
 
   end
 
