@@ -2,18 +2,18 @@ clear all; close all;
 
 global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta lamda0
 
-k = ;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
-m = ;%masse de la tige(solide S2)
-Ma = ;%masse du solide S1
-g =9.8 ;%valeur du champs de gravitÃ©
-l = ;%2 fois la longeure de la tige(solide S2)
-Io = ;%moment d'inertie de la tige par rapport Ã  son axe de rotation
-eps1 = ;%facteur d'amortissement visqueux liÃ© Ã  omega1
-eps2 = ;%facteur d'amortissement visqueux li2 Ã  omega2
-omega = ;%pulsation de l'exitation  
-lambda0 = ;%amplitude de l'exitation 
-omega1 = sqrt(k /(m+Ma));%pulsation du systÃ¨me masse ressort (pendule immobile)
-omega2 = sqrt(m*g*l/Io);%pulsation de rÃ©sonnance du pendule seul
+k = 0.2;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
+m = 0.5;%masse de la tige(solide S2)
+Ma = 5;%masse du solide S1
+g =9.81 ;%valeur du champs de gravité
+l = 5;%la moitie la longueure de la tige(solide S2)
+Io = 2.5;%moment d'inertie de la tige par rapport à son axe de rotation
+eps1 = 0.005;%facteur d'amortissement visqueux lié à omega1
+eps2 = 0.005;%facteur d'amortissement visqueux li2 à omega2
+a = 0.02;%amplitude de l'exitation d'entree 
+omega1 = sqrt(k /(m+Ma));%pulsation du système masse ressort (pendule immobile)
+omega2 = sqrt(m*g*l/Io);%pulsation de résonnance du pendule seul
+omega = (omega1 + omega2)/2;%pulsation de l'exitation  
 alpha = m/(m+Ma) ;%coefficient adimensionnel 
 beta = m*l^2/Io;%coefficient adimensionnel 
 
@@ -30,6 +30,7 @@ dt=periode/nb_pts_per;  % taille du pas de temps
 nb_per=30;              % nb de periodes pour le calcul temporel
 t_tot=nb_per*periode;   % temps final
 t_init=0;               % temps initial
+timespan = t_init:dt:t_tot;
 
 %Le vecteur X est le vecteur des inconnues il contient z et theta 
 z0 = ;%valeur de z initiale 
