@@ -1,13 +1,13 @@
 clear all; close all;
 
-global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta lamda0
+global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta a
 
 k = 0.2;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
 m = 0.5;%masse de la tige(solide S2)
 Ma = 5;%masse du solide S1
 g =9.81 ;%valeur du champs de gravité
 l = 5;%la moitie la longueure de la tige(solide S2)
-Io = 2.5;%moment d'inertie de la tige par rapport à son axe de rotation
+Io = 4*m*(l^2);%moment d'inertie de la tige par rapport à son axe de rotation
 eps1 = 0.005;%facteur d'amortissement visqueux lié à omega1
 eps2 = 0.005;%facteur d'amortissement visqueux li2 à omega2
 a = 0.02;%amplitude de l'exitation d'entree 
@@ -32,14 +32,17 @@ t_tot=nb_per*periode;   % temps final
 t_init=0;               % temps initial
 timespan = t_init:dt:t_tot;
 
-%Le vecteur X est le vecteur des inconnues il contient z et theta 
-z0 = ;%valeur de z initiale 
-zp0 = ;%valeur de z_point initiale
-theta0 = ;%valeur de theta initiale 
-thetap0 = ;% valeur de theta_point initiale
+%Le vecteur X est le vecteur des inconnues, il contient z et theta 
+z0 = 0;%valeur de z initiale 
+zp0 = 0.1;%valeur de z_point initiale
+theta0 = 0;%valeur de theta initiale 
+thetap0 = 0.1;% valeur de theta_point initiale
 X0=[z0;theta0];dX0=[zp0;thetap0];           % conditions initiales
 
 [tt,Xt,dXt]=newmark(X0,dX0,t_init,dt,t_tot);   % Integration par Newmark
 
-%% Comparaison avec ode45 a decommenter Ã  effectuer
+%% Comparaison avec ode45
+Y0 = [z0,zp0, theta0, thetap0]; 
+[tt, Y] = ode45(@Pendule_Function_NL, timespan, Y0);
+
 
