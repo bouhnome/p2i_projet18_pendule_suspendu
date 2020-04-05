@@ -45,4 +45,28 @@ X0=[z0;theta0];dX0=[zp0;thetap0];           % conditions initiales
 Y0 = [z0,zp0, theta0, thetap0]; 
 [tt, Y] = ode45(@Pendule_Function_NL, timespan, Y0);
 
+%Comparaison ode45 et Newmark
+hold on 
+plot(tt(1,:),Xt(1,:))
+plot(tt(1,:),Y(1,:))
+hold off
+legend('Z newmark','Z ode45')
+
+hold on
+plot(tt(1,:),Xt(2,:))
+plot(tt(1,:),Y(3,:))
+hold off
+legend('Theta newmark','Theta ode45')
+
+hold on 
+plot(tt(1,:),dXt(1,:))
+plot(tt(1,:),Y(2,:))
+hold off
+legend('Vitesse newmark','Vitesse ode45')
+
+hold on 
+plot(tt(1,:),dXt(2,:))
+plot(tt(1,:),Y(4,:))
+hold off
+legend('Vitesse ang newmark','Vitesse angulaire ode45')
 
