@@ -21,9 +21,9 @@ function [tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot)
   A = inv(A);
 
 
-  for i=1:size(tt)-1%boucle d'intégration temporelle
+  for i=1:size(tt)-1%boucle d'integration temporelle
   
-   Y(:,i+1)=A*[-Y(1:2,i)-dt*Y(3:4,i)-dt^2*E/4*Y(3:4,i)-dt^2*F/4*Y(1:2,i)-dt^2/4*G(:,i)-dt^2/4*G(:,i+1);-Y(3:4,i)-dt*E/2*Y(3:4,i)-dt*F/2*Y(1:2,i)-dt*G(:,i)/2-dt/2*G(:,i+1)];%cf dernière équation dans le commentaire de l'issue#8
+   Y(:,i+1)=A*[-Y(1:2,i)-dt*Y(3:4,i)-dt^2*E/4*Y(3:4,i)-dt^2*F/4*Y(1:2,i)-dt^2/4*G(:,i)-dt^2/4*G(:,i+1); -Y(3:4,i)-dt*E/2*Y(3:4,i)-dt*F/2*Y(1:2,i)-dt*G(:,i)/2-dt/2*G(:,i+1)];%cf dernière équation dans le commentaire de l'issue#8
   end
   %on met les résultats dans les variables à renvoyer
   Xt=[Y(1,:);Y(2,:)];

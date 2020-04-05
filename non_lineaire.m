@@ -1,6 +1,6 @@
 clear all; close all;
 
-global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta a
+global k m Ma g l Io omega1 omega2 omega0 eps1 eps2 alpha beta a
 
 k = 0.2;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
 m = 0.5;%masse de la tige(solide S2)
@@ -13,7 +13,7 @@ eps2 = 0.005;%facteur d'amortissement visqueux li2 à omega2
 a = 0.02;%amplitude de l'exitation d'entree 
 omega1 = sqrt(k /(m+Ma));%pulsation du système masse ressort (pendule immobile)
 omega2 = sqrt(m*g*l/Io);%pulsation de résonnance du pendule seul
-omega = (omega1 + omega2)/2;%pulsation de l'exitation  
+omega0 = (omega1 + omega2)/2;%pulsation de l'exitation  
 alpha = m/(m+Ma) ;%coefficient adimensionnel 
 beta = m*l^2/Io;%coefficient adimensionnel 
 
@@ -24,7 +24,7 @@ C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
 K = [omega1^2,0;0,0];
 
 
-periode=2*pi/omega;      % periode de l'excitation et de la reponse
+periode=2*pi/omega0;      % periode de l'excitation et de la reponse
 nb_pts_per=30;          % nb de points par periode pour l integration temporelle
 dt=periode/nb_pts_per;  % taille du pas de temps
 nb_per=30;              % nb de periodes pour le calcul temporel
