@@ -1,17 +1,17 @@
 clear vars
 close all
 % parametres
-% acceleration pesanteur g, longueur a vide du ressort, omega1 pulsation de
-% resonance de systeme masse M ressort k, omega2 pulsation de resonance du
-% pendule non elastique (longueur l0), epsilon1 et 2 facteurs d'amortissements
-% associe a omega1 et omega2, omega pulsation d'excitation et a amplitude
-% d'excitation
 %
-global l0 a omega1 omega2 eps1 eps2 omega;
-global M C K m g k;
-M=eye(2);C=zeros(2);K=zeros(2);
+global Io l a omega1 omega2 eps1 eps2 omega alpha beta;
+global Ma m g k;
+global M C K; 
+M=zeros(2,2);
+C=zeros(2,2);
+K=zeros(2,2);
 %
-g=9.81; m=0.02; l0=0.6;
+g=9.81; m=0.02; Io=0.6; l=1; Ma=1;
+alpha = m/(m+Ma) ; 
+beta = m*l^2/Io;
 %
 scz=get(0,'screensize');
 %
@@ -28,12 +28,12 @@ eps2=0.02;
 k=0.5;
 %
 % pulsation et frequence de resonance du systeme masse ressort
-omega1=sqrt(k/m);
+omega1=sqrt(k/m+Ma);
 f1=omega1/(2*pi);
 T1=1/f1;
 %
 % pulsation de resonance du pendule seul
-omega2=sqrt(g/l0);
+omega2=sqrt(m*g*l/Io);
 f2=omega2/(2*pi);
 T2=1/f2;
 % 
@@ -45,11 +45,11 @@ end
 % Position initiale
 theta0=0.0;
 thetap0=0.01;
-rho0=1.0;
-rhop0=0;
-x0=[rho0,rhop0,theta0,thetap0];
-X0=[rho0;theta0];
-dX0=[rhop0;thetap0];
+z0=1.0;
+zp0=0;
+x0=[z0,zp0,theta0,thetap0];
+X0=[z0;theta0];
+dX0=[zp0;thetap0];
 %
 % pulsation et periode d'excitation 
 omega=omega2*5/4;
@@ -70,14 +70,11 @@ for k=1:ne
     a=a+da;
     %
     % integration des equations de mouvement
-%     [t,x]=ode45(@Pendule_elastique,t_balayage,x0);
-    [t,x,dx]=newmarklin(X0,dX0,t0,dt,tf);
+    [tt,Xt,dXt]=newmarklin(X0,dX0,t0,dt,tf);
     %
     % longueur et position angulaire du pendule
-%     l=x(:,1)*l0;
-%     theta=x(:,3);
-    l=x(1,:)*l0;
-    theta=x(2,:);
+    l=Xt(1,:)*Io;
+    theta=Xt(2,:);
     %
     % nt nombre de points d'integration 
     % na ordre du point e partir duquel on considere que la solution est stable
@@ -100,7 +97,7 @@ for k=1:ne
     % theta sur les nth dernieres periodes
     figure(hfg(2));
     set(hfg(2),'position',[10 150+scz(4)/3 scz(3)/4 scz(4)/3]);
-    plot(t(nt-nth*ni:nt),theta(nt-nth*ni:nt))
+    plot(tt(nt-nth*ni:nt),theta(nt-nth*ni:nt))
     xlabel('t (s)')
     ylabel('\theta (rd)')
     axis([(nt-nth*ni)*dt tf -1.5 1.5]);
@@ -109,8 +106,8 @@ for k=1:ne
 %
 %     thetap=x(:,4);
 %     lp=x(:,2);
-    thetap=dx(2,:);
-    lp=dx(1,:);
+    thetap=dXt(2,:);
+    lp=dXt(1,:);
 %
 %   construction des sections de Poincare par echantillonnage tous les ni
 %   points des ns derniere periodes

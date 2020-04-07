@@ -3,41 +3,43 @@ clear vars
 clf
 %clc
 
-global knl p0 OMEGA
-global M C K
+global Io l a omega1 omega2 eps1 eps2 omega alpha beta;
+global Ma m g k;
+global M C K;
 
-M=1;
-C=0.1;
-K=1;
-knl=0.25;
-p0=.5;
+M = [1,0;0,l];
+C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
+K = [omega1^2,0;0,0];
+k ; m ; Ma ; g=9.8 ; l ; Io ;
+eps1 ; eps2 ;
+omega ; lambda0 ;
+omega1 = sqrt(k /(m+Ma));
+omega2 = sqrt(m*g*l/Io);
+alpha = m/(m+Ma) ;
 
-% OMEGA=1.35;
-OMEGA=1.5;
-% OMEGA=1.62;
-periode=2*pi/OMEGA;
-nb_pts_per=31;
+periode=2*pi/omega;
+nb_pts_per=30;
 dt=periode/nb_pts_per;
 ttot=40*periode;
 
 % Conditions initiales
 % pas de la grille
-dx0=0.5; dv0=1;;    % grille grossiere
+dz0=0.5; dv0=1;    % grille grossiere
 % dx0=0.2; dv0=.4;   % grille moyenne
 % bornes de la grille
-x0=-6:dx0:7;   
+z0=-6:dz0:7;   
 v0=-15:dv0:15;
 
-W=zeros(length(v0),length(x0));
+W=zeros(length(v0),length(z0));
 
 for i=1:length(x0)      % boucle sur les CI
     for j=1:length(v0)
 %         [tt,Xt,dXt]=newmark(x0(i),v0(j),0,dt,ttot);
-          [tt,Xt,dXt]=newmark2(x0(i),v0(j),0,dt,ttot);
+          [tt,Xt,dXt]=newmarklin(z0(i),v0(j),0,dt,ttot);
           W(j,i)=max(Xt(1,end-2*nb_pts_per:end));
     end
     figure(1)
-    pcolor(x0,v0,W)
+    pcolor(z0,v0,W)
     caxis([0 max(W(:))])
     drawnow
 %     shading('flat')
