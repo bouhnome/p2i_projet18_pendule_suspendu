@@ -1,9 +1,9 @@
 function [tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot)  
-  global k m Ma g l Io omega1 omega2 omega eps1 eps2 alpha beta lamda0
+  global k m Ma g l Io omega1 omega2 omega0 eps1 eps2 alpha Beta a
   
   tt=[t_init:dt:t_tot];%vecteur tt à retourner 
   Y = zeros(2*size(X0,1),size(tt,2));%création de la matrice utilisé dans les calculs cf commentaire de l'issue #8
-  ddlambda = -omega^2*lamda0*sin(omega*tt);%terme d'exitation 
+  ddlambda = -omega0^2*a*sin(omega0*tt);%terme d'exitation 
 
   %initialisation
   Y(1,1)=X0(1);
