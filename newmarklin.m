@@ -3,7 +3,7 @@ function [tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot)
   
   tt=[t_init:dt:t_tot];%vecteur tt à retourner 
   Y = zeros(2*size(X0,1),size(tt,2));%création de la matrice utilisé dans les calculs cf commentaire de l'issue #8
-  ddlambda = -omega0^2*a*sin(omega0*tt);%terme d'exitation 
+  %ddlambda = -omega0^2*a*sin(omega0*tt);%terme d'exitation pour la réponse libre le terme d'exitation est nul 
 
   %initialisation
   Y(1,1)=X0(1);
@@ -14,7 +14,7 @@ function [tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot)
   %on  pose les variables qui permettent de simplifer les expressions cf commentaire de l'issue #8
   E = [-2*eps1*omega1,0;0,-2*eps2*omega2];
   F = [-omega1^2,0;0,-omega2^2];
-  G = [-ddlambda;zeros(1,size(tt,2))];
+  G = [zeros(1,size(tt,2));zeros(1,size(tt,2))];
   
   %on inverse la matrice en dehors de la boucle pour ne pas gaspiller du temps de calcul 
   A = [dt^2*F/4-eye(2) , dt^2*E/4   ;   dt*F/2 , dt*E/2-eye(2)];
