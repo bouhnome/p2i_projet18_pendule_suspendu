@@ -7,9 +7,7 @@ offsety = 0;
 
 
 %%%%=================================tracé du solide 1==============%
-%position de S1 relative à la figure
-offsetS1x=0;
-offsetS1y=0; 
+
 %nous dessinons seulement la partie haute et droite de S1 et nous
 %utilisons les symmetries
 XS1= [540 740 740 800 800 840 840];
@@ -17,23 +15,39 @@ YS1= [220 220 160 160 220 220 160];
 
 
 %%%%=================================tracé du solide 0*==============%
-%position de S0* relative à la figure
-offsetS0stx=0;
-offsetS0sty=0; 
+
 %nous dessinons seulement la partie droite de S0* et nous
 %utilisons les symmetries
 XS0st= [544 824 824 824 904 904 824 824 824 544];
 YS0st= [648 648 343 648 648 683 683 725 683 683];
 
 
+%%%%===============================tracé du solide 0===================%s
+
+%nous dessinons seulement la partie droite de S0 et nous
+%utilisons les symmetries
+XS0=[545 788 788 810 828  828 788 788]+14;
+XS0(1)=XS0(1)-14;
+YS0=[739 739 702 702 702  780 780 739];
+
+
 
 %=======================================Le plot====================% 
-for(j=1:2000)  
+for(j=1:2900)  
     
+theta = j/10;%mettre le mouvement en theta ici
+    
+%position de S1 relative à la figure
 offsetS1x=0;
-offsetS1y=10*sin(j);
+offsetS1y=10*sin(1/2*j); %mettre ici le mouvement en z
+
+%position de S0* relative à la figure
 offsetS0stx=0;
-offsetS0sty=0; 
+offsetS0sty=17*sin(1/8*j); %mettre ici le mouvement en lambda
+
+%position de S0 relative à la figure
+offsetS0x=0;
+offsetS0y=0; 
 
 a= 32*(10*size-10)+320;
 xS1 = (XS1-offsetx-offsetS1x)*size;
@@ -49,8 +63,16 @@ yS0st= -YS0st*size+343*size-offsety*size-offsetS0sty*size;
 yS0st(3)=yS1oppo(5);
 xS0stoppo = 2*(XS0st(1)-offsetx-offsetS0stx)*size-size*(XS0st-offsetx-offsetS0stx);
 
-plot(xS1,yS1,'-b',  xS1oppo,yS1,'-b',   xS1,yS1oppo,'-b',     xS1oppo,yS1oppo,'-b',xS0st,yS0st,xS0stoppo,yS0st)
+xS0=(XS0-offsetx-offsetS0x)*size;
+yS0= -YS0*size-offsety*size-offsetS0y*size+320*size;
+yS0st(8)=yS0(3);
+xS0oppo = 2*(XS0(1)-offsetx-offsetS0x)*size-size*(XS0-offsetx-offsetS0x);
 
-axis([0 1000 -400 400])
-pause(0.1)
+
+
+
+plot(xS1,yS1,'-b',  xS1oppo,yS1,'-b',   xS1,yS1oppo,'-b',     xS1oppo,yS1oppo,'-b',xS0st,yS0st,'-g',xS0stoppo,yS0st,'-g', xS0,yS0,'-bla',xS0oppo,yS0,'-bla' , [xS0st(2),xS0st(2)],[2*yS1(5)-yS1(5),yS0st(2)+600*size],'-g',[xS0stoppo(2),xS0stoppo(2)],[2*yS1(5)-yS1(5),yS0st(2)+600*size],'-g',[xS0st(2),xS0st(2)],[yS0(6),yS0st(2)-200*size],'-g',[xS0stoppo(2),xS0stoppo(2)],[yS0(6),yS0st(2)-200*size],'-g',[xS1(1) xS1(1)+size*324*sin(theta)],[yS1(3) yS1(3)-324*size*cos(theta)],'-r')
+axis([100-offsetx 1000-offsetx -600-offsety 400-offsety]*size)
+
+pause(0.01)
 end
