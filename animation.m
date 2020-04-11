@@ -41,11 +41,11 @@ for j=1:size(tt,2)-1
     
 %position de S1 relative à la figure
 offsetS1x=0;
-offsetS1y=-Xt(1,j); %mettre ici le mouvement en z
+offsetS1y=-Xt(1,j)/Size; %mettre ici le mouvement en z
 theta = Xt(2,j);%mettre le mouvement en theta ici
 %position de S0* relative à la figure
 offsetS0stx=0;
-offsetS0sty=-lambda(j); %mettre ici le mouvement en lambda
+offsetS0sty=-lambda(j)/Size; %mettre ici le mouvement en lambda
 
 %position de S0 relative à la figure
 offsetS0x=0;
