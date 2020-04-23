@@ -72,7 +72,7 @@ xS0oppo = 2*(XS0(1)-offsetx-offsetS0x)*Size-Size*(XS0-offsetx-offsetS0x);
 
 
 
-
+figure(5)
 plot(xS1,yS1,'-b',  xS1oppo,yS1,'-b',   xS1,yS1oppo,'-b',     xS1oppo,yS1oppo,'-b',xS0st,yS0st,'-g',xS0stoppo,yS0st,'-g', xS0,yS0,'-bla',xS0oppo,yS0,'-bla' , [xS0st(2),xS0st(2)],[2*yS1(5)-yS1(5),yS0st(2)+600*Size],'-g',[xS0stoppo(2),xS0stoppo(2)],[2*yS1(5)-yS1(5),yS0st(2)+600*Size],'-g',[xS0st(2),xS0st(2)],[yS0(6),yS0st(2)-200*Size],'-g',[xS0stoppo(2),xS0stoppo(2)],[yS0(6),yS0st(2)-200*Size],'-g',[xS1(1) xS1(1)+Size*324*sin(theta)],[yS1(3) yS1(3)-324*Size*cos(theta)],'-r')
 axis([100-offsetx 1000-offsetx -600-offsety 400-offsety]*Size)
 
