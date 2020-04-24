@@ -22,12 +22,12 @@ C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
 K = [omega1^2,0;0,0];
 %%
 
-periode=2*pi/omega;      % periode de l'excitation et de la reponse
+periode=2*pi/omega0;      % periode de l'excitation et de la reponse
 nb_pts_per=30;          % nb de points par periode pour l integration temporelle
 dt=periode/nb_pts_per;  % taille du pas de temps
-nb_per=30;              % nb de periodes pour le calcul temporel
+nb_per=70;              % nb de periodes pour le calcul temporel
 t_tot=nb_per*periode;   % temps final
-t_init=0;               % temps initial
+t_init=0;               % temps initial     
 
 %Le vecteur X est le vecteur des inconnues il contient z et theta 
 z0 = 0.5;%valeur de z initiale 

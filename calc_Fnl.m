@@ -20,9 +20,8 @@ M = [1,0;0,l];
 C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
 K = [omega1^2,0;0,0];
 %%
-Fnl = zeros(size(X));
 
-Fnl = [lambdapp-l*alpha*sin(X(2))*ddX(2)-l*alpha*cos(X(2))*dX(2)*dX(2)  ;     -(beta*sin(X(2)))*(ddX(1)+lambdapp)+omega2^2*l*sin(X(2))];
+Fnl = [lambdapp-l*alpha*sin(X(2))*ddX(2)-l*alpha*cos(X(2))*dX(2)*dX(2);-(BETA*sin(X(2)))*(ddX(1)+lambdapp)+omega2^2*l*sin(X(2))];
 
 
 end 
