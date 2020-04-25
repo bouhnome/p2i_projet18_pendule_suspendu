@@ -30,9 +30,9 @@ lambdapp=lambdapp';
 t=t_init;n=1;
 X=X0; dX=dX0;
 %on détermine la valeur de l'accélération initiale
-ddX=inv([1,-l*alpha*sin(X(2,1));-BETA*sin(X(2,1)),l])*[-lambdapp(1,1)+(l*alpha*cos(X(2,1)))*dX(2,1)^2-2*eps1*omega1*dX(1,1)-omega1^2*X(1,1);BETA*sin(X(2,1))*lambdapp(1,1)-2*eps2*omega2*l*dX(2,1)-omega2^2*l*sin(X(2,1))];
+ddX=-inv([1,-l*alpha*sin(X(2,1));-BETA*sin(X(2,1)),l])*[-lambdapp(1,1)+(l*alpha*cos(X(2,1)))*dX(2,1)^2-2*eps1*omega1*dX(1,1)-omega1^2*X(1,1);BETA*sin(X(2,1))*lambdapp(1,1)-2*eps2*omega2*l*dX(2,1)-omega2^2*l*sin(X(2,1))];
 
-Fnl=calc_Fnl(X,dX,ddX,lambdapp(1,1));
+
 
 %% integration temporelle
 for t=t_init+dt:dt:t_tot;
@@ -41,19 +41,18 @@ for t=t_init+dt:dt:t_tot;
     % prediction
     X=X+dt*dX+(dt^2/2)*ddX;
     dX=dX+dt*ddX;
-    ddX=M\(-C*dX-K*X-Fnl);
+    ddX=-inv([1,-l*alpha*sin(X(2,1));-BETA*sin(X(2,1)),l])*[-lambdapp(1,1)+(l*alpha*cos(X(2,1)))*dX(2,1)^2-2*eps1*omega1*dX(1,1)-omega1^2*X(1,1);BETA*sin(X(2,1))*lambdapp(1,1)-2*eps2*omega2*l*dX(2,1)-omega2^2*l*sin(X(2,1))];
     % Calcul du residu
       Fnl=calc_Fnl(X,dX,ddX,lambdapp(n,1));
       res=-M*ddX-C*dX-K*X-Fnl;
-    %Calcul de la matrice effective
-      [dFX dFdX dFddX]=calc_dFnl(X,dX,ddX,lambdapp(n,1));
-      J=(4/dt^2)*(M+dFddX)+(2/dt)*(C+dFdX)+K+dFX;
-      % Calcul de la correction
-      deltaX=J\res;
+
     
     
-    while (norm(deltaX)>precNR);    %Newton Raphson
+    while (norm(res)>precNR);    %Newton Raphson
     
+        % Calcul du residu
+        Fnl=calc_Fnl(X,dX,ddX,lambdapp(n,1));
+        res=-M*ddX-C*dX-K*X-Fnl;
         % Calcul de la matrice effective
         [dFX dFdX dFddX]=calc_dFnl(X,dX,ddX,lambdapp(n,1));
         J=(4/dt^2)*(M+dFddX)+(2/dt)*(C+dFdX)+K+dFX;
@@ -62,9 +61,7 @@ for t=t_init+dt:dt:t_tot;
         X=X+deltaX;
         dX=dX+(2/dt)*deltaX;
         ddX=ddX+(4/dt^2)*deltaX;
-        % Calcul du residu
-        Fnl=calc_Fnl(X,dX,ddX,lambdapp(n,1));
-        res=-M*ddX-C*dX-K*X-Fnl;
+       
         
     end
     Xt(:,n)=X;
