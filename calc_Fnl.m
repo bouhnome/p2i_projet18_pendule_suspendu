@@ -21,7 +21,6 @@ C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
 K = [omega1^2,0;0,0];
 %%
 
-Fnl = [lambdapp-l*alpha*sin(X(2))*ddX(2)-l*alpha*cos(X(2))*dX(2)*dX(2);-(BETA*sin(X(2)))*(ddX(1)+lambdapp)+omega2^2*l*sin(X(2))];
-
+Fnl = [ddX(1)+lambdapp-l*alpha*sin(X(2))*ddX(2)-l*alpha*cos(X(2))*dX(2)^2+2*eps1*omega1*dX(1)+omega1^2*X(1);l*ddX(2)-(BETA*sin(X(2)))*(ddX(1)+lambdapp)+2*eps2*omega2*l*dX(2)+omega2^2*l*sin(X(2))];
 
 end 

@@ -32,7 +32,7 @@ t_init=0;               % temps initial
 %Le vecteur X est le vecteur des inconnues il contient z et theta 
 z0 = 0.5;%valeur de z initiale 
 zp0 = 0;%valeur de z_point initiale
-theta0 = 15*pi/180;%valeur de theta initiale 
+theta0 = 50*pi/180;%valeur de theta initiale 
 thetap0 = 0;% valeur de theta_point initiale
 X0=[z0;theta0];dX0=[zp0;thetap0];             % conditions initiales
          

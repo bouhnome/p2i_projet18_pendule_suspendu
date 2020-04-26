@@ -41,21 +41,17 @@ for t=t_init+dt:dt:t_tot;
     % prediction
     X=X+dt*dX+(dt^2/2)*ddX;
     dX=dX+dt*ddX;
-    ddX=-inv([1,-l*alpha*sin(X(2,1));-BETA*sin(X(2,1)),l])*[-lambdapp(1,1)+(l*alpha*cos(X(2,1)))*dX(2,1)^2-2*eps1*omega1*dX(1,1)-omega1^2*X(1,1);BETA*sin(X(2,1))*lambdapp(1,1)-2*eps2*omega2*l*dX(2,1)-omega2^2*l*sin(X(2,1))];
+    ddX=-inv([1,-l*alpha*sin(X(2,1));-BETA*sin(X(2,1)),l])*[-lambdapp(n,1)+(l*alpha*cos(X(2,1)))*dX(2,1)^2-2*eps1*omega1*dX(1,1)-omega1^2*X(1,1);BETA*sin(X(2,1))*lambdapp(n,1)-2*eps2*omega2*l*dX(2,1)-omega2^2*l*sin(X(2,1))];
     % Calcul du residu
-      Fnl=calc_Fnl(X,dX,ddX,lambdapp(n,1));
-      res=-M*ddX-C*dX-K*X-Fnl;
-
-    
+      res=-calc_Fnl(X,dX,ddX,lambdapp(n,1));
     
     while (norm(res)>precNR);    %Newton Raphson
     
         % Calcul du residu
-        Fnl=calc_Fnl(X,dX,ddX,lambdapp(n,1));
-        res=-M*ddX-C*dX-K*X-Fnl;
+         res=-calc_Fnl(X,dX,ddX,lambdapp(n,1));
         % Calcul de la matrice effective
         [dFX dFdX dFddX]=calc_dFnl(X,dX,ddX,lambdapp(n,1));
-        J=(4/dt^2)*(M+dFddX)+(2/dt)*(C+dFdX)+K+dFX;
+        J=(4/dt^2)*(dFddX)+(2/dt)*(dFdX)+dFX;
         % Calcul de la correction
         deltaX=J\res;
         X=X+deltaX;
