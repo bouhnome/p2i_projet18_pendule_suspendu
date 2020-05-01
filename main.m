@@ -113,7 +113,7 @@ plot(tt,dXt_lin(2,:));
 
 %Animation
 figure(5)
-animation(tt,Xt,zeros(size(tt))) 
+animation(tt,Xt_lin,a*sin(omega0*tt)) 
 end
 
 if choix ==3 % Affichage d'une comparaison entre la solution linéaire et non-linéaire
