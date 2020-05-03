@@ -1,50 +1,56 @@
-clear vars; close all;
+close all
+clear vars
 
-global Io l a omega1 omega2 eps1 eps2 omega alpha beta;
-global Ma m g k;
-global M C K;
+global k m Ma g l Io eps1 eps2 a omega1 omega2 omega0 alpha BETA M C K
+
+k = 0.2;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
+m = 0.5;%masse de la tige(solide S2)
+Ma = 5;%masse du solide S1
+g =9.81 ;%valeur du champs de gravité
+l = 5;%la moitie la longueure de la tige(solide S2)
+Io = 4*m*(l^2)/3;%moment d'inertie de la tige par rapport à son axe de rotation
+eps1 = 0.005;%facteur d'amortissement visqueux lié à omega1
+eps2 = 0.005;%facteur d'amortissement visqueux li2 à omega2
+a = 0;%amplitude de l'exitation d'entree 
+omega1 = sqrt(k /(m+Ma));%pulsation du système masse ressort (pendule immobile)
+omega2 = sqrt(m*g*l/Io);%pulsation de résonnance du pendule seul
+omega0 = (omega1 + omega2)/2;%pulsation de l'exitation  
+alpha = m/(m+Ma) ;%coefficient adimensionnel 
+BETA = m*l^2/Io;%coefficient adimensionnel 
 
 M = [1,0;0,l];
 C = [2*eps1*omega1,0;0,2*eps2*omega2*l];
 K = [omega1^2,0;0,0];
-k ; m ; Ma ; g=9.8 ; l ; Io ;
-eps1 ; eps2 ;
-omega ; lambda0 ;
-omega1 = sqrt(k /(m+Ma));
-omega2 = sqrt(m*g*l/Io);
-alpha = m/(m+Ma) ;
-
-periode=2*pi/omega;
-nb_pts_per=30;
-dt=periode/nb_pts_per;
-ttot=40*periode;
-
-OMEGA_debut=0.5;OMEGA_fin=2.5;dOMEGA=0.05;
 
 nb_pts_per=30;          % nb de points par periode pour l integration temporelle
-nb_per=50;              % nb de periodes pour le calcul temporel
-t_init=0;               % temps initial
+nb_per=30;              % nb de periodes pour le calcul temporel
+t_init=0;               % temps initial  
+
+omegaf=5;domega=0.05;
 
 % conditions initiales
-z0=0.5;dz0=0;
-k=0; omega=OMEGA_debut;
+z0 = 0.5;%valeur de z initiale 
+zp0 = 0;%valeur de z_point initiale
+theta0 = 15*pi/180;%valeur de theta initiale 
+thetap0 = 0;% valeur de theta_point initiale
+X0=[z0;theta0];
+dX0=[zp0;thetap0]; 
+omega=omega0;
 
 %% Montee en frequence
 % boucle sur Omega 
-while (omega<OMEGA_fin)
-  OME(k+1)=omega;
+j=0;
+while (omega<omegaf)
+  OME(j+1)=omega;
   periode=2*pi/omega;      % periode de l'excitation et de la reponse
   dt=periode/nb_pts_per;  % taille du pas de temps
   t_tot=nb_per*periode;   % temps final
-  % calcul de z(t)
-  [tt,Xt,dXt]=newmark(z0,dzoui0,t_init,dt,t_tot);   % Integration par Newmark
-  % recherche de l'amplitude max
-  W(k+1)=max(Xt(1,end-3*nb_pts_per:end));
-  txt=sprintf('ome=%7.5f x=%0.5g',OME(k+1),W(k+1));   % affichage resultat
-  disp(txt);
-  z0=Xt(1,end);dz0=dXt(1,end);   % nouvelles CI
-  omega=omega+dOMEGA;
-  k=k+1;
+  [tt,Xt,dXt]=newmark(X0,dX0,t_init,dt,t_tot);   % Integration par Newmark
+  W(j+1)=max(Xt(1,end-3*nb_pts_per:end));
+  X0=Xt(:,end);
+  dX0=dXt(:,end);   % nouvelles CI
+  omega=omega+domega;
+  j=j+1;
 end
 plot(OME,W,'r-o')    % courbe de reponse
 title('Courbe de reponse')
