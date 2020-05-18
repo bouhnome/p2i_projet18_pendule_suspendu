@@ -35,7 +35,9 @@ YS0=[739 739 702 702 702  780 780 739];
 
 
 %=======================================Le plot====================% 
-for j=1:size(tt,2)-1
+for j=1:6:size(tt,2)-6
+    %on met un incrément de 2 pour pouvoir une très petite valeur de dt
+    %sans trop ralentir l'animation
     
 
     

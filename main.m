@@ -11,7 +11,7 @@ l = 0.1;%la moitie la longueure de la tige(solide S2)
 Io = 4*m*(l^2)/3;%moment d'inertie de la tige par rapport à son axe de rotation
 eps1 = 0.005;%facteur d'amortissement visqueux lié à omega1
 eps2 = 0.005;%facteur d'amortissement visqueux li2 à omega2
-a = 0.001;%amplitude de l'exitation d'entree 
+a = 0;%amplitude de l'exitation d'entree 
 omega1 = sqrt(k /(m+Ma));%pulsation du système masse ressort (pendule immobile)
 omega2 = sqrt(m*g*l/Io);%pulsation de résonnance du pendule seul
 omega0 = (omega1 + omega2)/2;%pulsation de l'exitation  
@@ -27,7 +27,7 @@ K = [omega1^2,0;0,0];
 
 %% Données de simulation
 periode=2*pi/omega0;      % periode de l'excitation et de la reponse
-nb_pts_per=40;          % nb de points par periode pour l integration temporelle
+nb_pts_per=300;          % nb de points par periode pour l integration temporelle
 %il faut noter que la valeur du pas de temps change dramatiquement les
 %solutions calculés en régime chaotique(effet papillon?)
 %aussi augmenter le pas de temps donne des résultats plus précis mais
@@ -38,9 +38,9 @@ t_tot=nb_per*periode;   % temps final
 t_init=0;               % temps initial     
 
 %Le vecteur X est le vecteur des inconnues il contient z et theta 
-z0 = 0.003;%valeur de z initiale 
+z0 = 0.1;%valeur de z initiale 
 zp0 = 0;%valeur de z_point initiale
-theta0 = 2*pi/180;%valeur de theta initiale 
+theta0 = 45*pi/180;%valeur de theta initiale 
 thetap0 = 0;% valeur de theta_point initiale
 X0=[z0;theta0];dX0=[zp0;thetap0];             % conditions initiales
          
