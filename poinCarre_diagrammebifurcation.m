@@ -121,7 +121,7 @@ for i=1:ne
     set(figure(5),'position',[2*scz(3)/4-100 50 scz(3)/4 scz(4)/3]);
     plot(amp,ypp,'.b');
     xlabel('a (m)')
-    ylabel('z (m)')
+    ylabel('dz/dt (m/s)')
     title('diagramme de bifurcation "en z"')
     drawnow
     hold on
@@ -130,7 +130,7 @@ for i=1:ne
     set(figure(6),'position',[2*scz(3)/4-100 150+scz(4)/3 scz(3)/4 scz(4)/3]);
     plot(amp,xpp,'.b');
     xlabel('a (m)')
-    ylabel('\theta (rd)')
+    ylabel('d\theta/dt (°/s)')
     title('diagramme de bifurcation "en theta"')
     drawnow
     hold on
