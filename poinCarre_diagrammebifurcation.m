@@ -64,7 +64,7 @@ for k=1:ne
     % integration des equations de mouvement
     [tt,Xt,dXt]=newmark(X0,dX0,t0,dt,tf);
     %
-    % longueur et position angulaire du pendule
+    % z et position angulaire du pendule
     z=Xt(1,:)*l;
     theta=Xt(2,:);
     %
