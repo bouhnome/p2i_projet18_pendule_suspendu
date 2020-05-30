@@ -45,7 +45,7 @@ while (omega<omegaf)
   periode=2*pi/omega;      % periode de l'excitation et de la reponse
   dt=periode/nb_pts_per;  % taille du pas de temps
   t_tot=nb_per*periode;   % temps final
-  [tt,Xt,dXt]=newmark(X0,dX0,t_init,dt,t_tot);   % Integration par Newmark
+  [tt,Xt,dXt]=newmarklin(X0,dX0,t_init,dt,t_tot);   % Integration par Newmark
   W(j+1)=max(Xt(1,end-3*nb_pts_per:end));
   X0=Xt(:,end);
   dX0=dXt(:,end);   % nouvelles CI
