@@ -51,7 +51,7 @@ T=2*pi/omega0;
 % ns nombre de periode d'integration a partir de laquelle la reponse est consideree comme stable
 % ni nombre de point d'integration pour la plus petite periode
 % nth nombre de periode de trace de la reponse temporelle en theta
-np=500; ns=400; ni=40; nth=40;
+np=500; ns=400; ni=40; nth=30;
 % balayage en temps
 t0=0; tf=np*T; dt=T/ni;
 %
