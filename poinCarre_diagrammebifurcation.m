@@ -31,10 +31,6 @@ ai=0.05; af=0.1; ne=101; da=(af-ai)/(ne-1);
 %
 a=ai;
 % 
-hfg=zeros(1,10);
-for ii=1:6
-   hfg(ii)=figure(ii);
-end
 %
 % Position initiale
 z0 = 0.5;%valeur de z initiale 
@@ -75,8 +71,8 @@ for i=1:ne
     %
     %
 %   position
-    figure(hfg(1));
-    set(hfg(1),'position',[10 50 scz(3)/4 scz(4)/3]);
+    figure(1);
+    set(figure(1),'position',[10 50 scz(3)/4 scz(4)/3]);
     plot(tt(nt-nth*ni:nt),z(nt-nth*ni:nt));
     xlabel('t (s)')
     ylabel('z (m)')
@@ -84,8 +80,8 @@ for i=1:ne
     drawnow
     %
 %   theta sur les nth dernieres periodes
-    figure(hfg(2));
-    set(hfg(2),'position',[10 150+scz(4)/3 scz(3)/4 scz(4)/3]);
+    figure(2);
+    set(figure(2),'position',[10 150+scz(4)/3 scz(3)/4 scz(4)/3]);
     plot(tt(nt-nth*ni:nt),theta(nt-nth*ni:nt))
     xlabel('t (s)')
     ylabel('\theta (°)')
@@ -103,16 +99,16 @@ for i=1:ne
     ypp=zp(na:ni:nt);
 % 
 % trace des sections de Poincare pour theta et z
-    figure(hfg(3));
-    set(hfg(3),'position',[3*scz(3)/4-10 50 scz(3)/4 scz(4)/3]);
+    figure(3);
+    set(figure(3),'position',[3*scz(3)/4-10 50 scz(3)/4 scz(4)/3]);
     plot(yp(:),ypp(:),'.b');
     xlabel('z (m)')
     ylabel('dz/dt (m/s)')
     title('section de Poincare "en z"')
     drawnow
 %  
-    figure(hfg(4));
-    set(hfg(4),'position',[3*scz(3)/4-10 150+scz(4)/3 scz(3)/4 scz(4)/3]);
+    figure(4);
+    set(figure(4),'position',[3*scz(3)/4-10 150+scz(4)/3 scz(3)/4 scz(4)/3]);
     plot(xp(:),xpp(:),'.b');
     xlabel('\theta (°)')
     ylabel('d\theta/dt (°/s)')
@@ -121,8 +117,8 @@ for i=1:ne
     
     amp(1:length(ypp))=a;
     % trace du diagramme de bifurcation
-    figure(hfg(5));
-    set(hfg(5),'position',[2*scz(3)/4-100 50 scz(3)/4 scz(4)/3]);
+    figure(5);
+    set(figure(5),'position',[2*scz(3)/4-100 50 scz(3)/4 scz(4)/3]);
     plot(amp,ypp,'.b');
     xlabel('a (m)')
     ylabel('z (m)')
@@ -130,8 +126,8 @@ for i=1:ne
     drawnow
     hold on
 %
-    figure(hfg(6));
-    set(hfg(6),'position',[2*scz(3)/4-100 150+scz(4)/3 scz(3)/4 scz(4)/3]);
+    figure(6);
+    set(figure(6),'position',[2*scz(3)/4-100 150+scz(4)/3 scz(3)/4 scz(4)/3]);
     plot(amp,xpp,'.b');
     xlabel('a (m)')
     ylabel('\theta (rd)')
