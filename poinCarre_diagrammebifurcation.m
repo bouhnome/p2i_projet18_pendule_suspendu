@@ -3,7 +3,7 @@ clear vars
 
 global k m Ma g l Io eps1 eps2 a omega1 omega2 omega0 alpha BETA M C K
 
-k = 0.2;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
+k = 300;%2 fois la constante de raideur. (chaque ressort a une raideur de k/2)
 m = 0.1;%masse de la tige(solide S2)
 Ma = 0.5;%masse du solide S1
 g =9.81 ;%valeur du champs de gravité
@@ -46,18 +46,18 @@ dX0=[zp0;thetap0];
 %
 % pulsation et periode d'excitation 
 T=2*pi/omega0;
-%
+
 % np nombre de periode d'integration pour chaque solution temporelle
 % ns nombre de periode d'integration a partir de laquelle la reponse est consideree comme stable
 % ni nombre de point d'integration pour la plus petite periode
 % nth nombre de periode de trace de la reponse temporelle en theta
-np=500; ns=400; ni=40; nth=30;
+np=500; ns=400; ni=40; nth=20;
 % balayage en temps
 t0=0; tf=np*T; dt=T/ni;
 %
 %
 
-for k=1:ne
+for i=1:ne
     % incrementaion de a de 1 mm
     a=a+da;
     %
@@ -124,7 +124,6 @@ for k=1:ne
     figure(hfg(5));
     set(hfg(5),'position',[2*scz(3)/4-100 50 scz(3)/4 scz(4)/3]);
     plot(amp,ypp,'.b');
-    axis([ai ai+ne*da -1.6 1.6]);
     xlabel('a (m)')
     ylabel('z (m)')
     title('diagramme de bifurcation "en z"')
@@ -135,7 +134,7 @@ for k=1:ne
     set(hfg(6),'position',[2*scz(3)/4-100 150+scz(4)/3 scz(3)/4 scz(4)/3]);
     plot(amp,xpp,'.b');
     xlabel('a (m)')
-    ylabel('\theta (°)')
+    ylabel('\theta (rd)')
     title('diagramme de bifurcation "en theta"')
     drawnow
     hold on
