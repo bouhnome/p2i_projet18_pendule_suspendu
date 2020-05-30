@@ -65,7 +65,7 @@ for k=1:ne
     [tt,Xt,dXt]=newmark(X0,dX0,t0,dt,tf);
     %
     % longueur et position angulaire du pendule
-    z=Xt(1,:)*Io;
+    z=Xt(1,:)*l;
     theta=Xt(2,:);
     %
     % nt nombre de points d'integration 
@@ -93,7 +93,7 @@ for k=1:ne
     drawnow
 %
     thetap=dXt(2,:);
-    zp=dXt(1,:)*Io;
+    zp=dXt(1,:)*l;
 %
 %   construction des sections de Poincare par echantillonnage tous les ni
 %   points des ns derniere periodes
