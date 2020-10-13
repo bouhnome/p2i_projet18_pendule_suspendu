@@ -1,6 +1,8 @@
 # p2i_projet18_pendule_suspendu
 This repository contains the files of the Matlab simulator for a suspended pendulum
 
+BY IRVIN COTE
+
 Consignes : 
 -Les issues de Github sont utilisées pour constituer une liste de choses à faire pour terminer le projet <br />
 -Avant de commencer à travailler sur une issue l'étudiant doit s'assigner à cette issue afin d'éviter que deux étudiants travaillent sur la même chose<br />
